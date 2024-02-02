@@ -49,6 +49,6 @@ public class Studentdao
 			exSt.setStudentPassword(s.getStudentPassword());
 			repo.save(exSt);
 		}
-		return s;
+		return exSt;
 	}
 }

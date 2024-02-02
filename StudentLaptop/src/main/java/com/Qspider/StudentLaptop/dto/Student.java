@@ -28,5 +28,5 @@ public class Student
 	@OneToOne(cascade = CascadeType.ALL)
 	private Laptop lap;
 	
-
+	
 }

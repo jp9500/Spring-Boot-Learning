@@ -22,7 +22,28 @@ public class LaptopDao
 		return lap.findAll();
 	}
 	
-	public Laptop findLaptop(int id) {
+	public Laptop findOneLaptop(int id) {
 		return lap.findById(id).get();
+	}
+	
+	public String deleteOneLaptop(int id) {
+		Laptop l=lap.findById(id).get();
+		String name=l.getLaptopBrand();
+		return name+" is Deleted Successfully";
+	}
+	
+	public String deleteAllLaptop() {
+		lap.deleteAll();
+		return "All laptops are Deleted";
+	}
+	
+	public Laptop updateLaptop(int id , Laptop l) {
+		Laptop exLap=lap.findById(id).get();
+		if(exLap.getLaptopId()==id) {
+			exLap.setLaptopId(id);
+			exLap.setLaptopName(l.getLaptopName());
+			exLap.setLaptopBrand(l.getLaptopBrand());
+		}
+		return exLap;
 	}
 }

@@ -22,6 +22,19 @@ public class LaptopService
 	}
 	
 	public Laptop findlaptop(int id) {
-		return dao.findLaptop(id);
+		return dao.findOneLaptop(id);
 	}
+	
+	public String deleteOneLaptop(int id) {
+		return dao.deleteOneLaptop(id);
+	}
+	
+	public String deleAllLaptop() {
+		return dao.deleteAllLaptop();
+	}
+	
+	public Laptop updateLaptop(int id , Laptop l) {
+		return dao.updateLaptop(id, l);
+	}
+
 }
