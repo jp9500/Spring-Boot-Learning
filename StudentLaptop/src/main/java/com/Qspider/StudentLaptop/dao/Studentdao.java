@@ -1,6 +1,7 @@
 package com.Qspider.StudentLaptop.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,11 @@ public class Studentdao
 	}
 	
 	public Student findOneStudent(int id) {
-		return repo.findById(id).get();
+		Optional<Student> opSt=repo.findById(id);
+		if(opSt.isPresent()) {
+			return opSt.get();
+		}
+		return null;
 	}
 	
 	public List<Student> findAllStudent() {
@@ -42,13 +47,10 @@ public class Studentdao
 	
 	public Student updateStudent(int id , Student s) {
 		Student exSt=repo.findById(id).get();
-		if(exSt.getStudentId()==id) {
-			exSt.setStudentId(id);
-			exSt.setStudentName(s.getStudentName());
-			exSt.setStudentEmail(s.getStudentEmail());
-			exSt.setStudentPassword(s.getStudentPassword());
-			repo.save(exSt);
+		if(exSt != null) {
+			s.setStudentId(id);
+			repo.save(s);
 		}
-		return exSt;
+		return s;
 	}
 }

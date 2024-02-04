@@ -1,6 +1,7 @@
 package com.Qspider.StudentLaptop.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,12 +24,17 @@ public class LaptopDao
 	}
 	
 	public Laptop findOneLaptop(int id) {
-		return lap.findById(id).get();
+		Optional<Laptop> opLap=lap.findById(id);
+		if(opLap.isPresent()) {
+			return opLap.get();
+		}
+		return null;
 	}
 	
 	public String deleteOneLaptop(int id) {
 		Laptop l=lap.findById(id).get();
 		String name=l.getLaptopBrand();
+		lap.deleteById(id);
 		return name+" is Deleted Successfully";
 	}
 	
@@ -39,11 +45,10 @@ public class LaptopDao
 	
 	public Laptop updateLaptop(int id , Laptop l) {
 		Laptop exLap=lap.findById(id).get();
-		if(exLap.getLaptopId()==id) {
-			exLap.setLaptopId(id);
-			exLap.setLaptopName(l.getLaptopName());
-			exLap.setLaptopBrand(l.getLaptopBrand());
+		if(exLap != null) {
+			l.setLaptopId(id);
+			lap.save(l);
 		}
-		return exLap;
+		return l;
 	}
 }

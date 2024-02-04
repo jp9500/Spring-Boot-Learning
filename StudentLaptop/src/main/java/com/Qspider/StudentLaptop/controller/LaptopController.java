@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Qspider.StudentLaptop.dto.Laptop;
@@ -31,12 +32,12 @@ public class LaptopController
 	}
 	
 	@GetMapping("findone")
-	public Laptop findLaptop(int id) {
+	public Laptop findLaptop(@RequestParam int id) {
 		return service.findlaptop(id);
 	}
 	
 	@DeleteMapping("deleteone")
-	public String deleteLaptop(int id) {
+	public String deleteLaptop(@RequestParam int id) {
 		return service.deleteOneLaptop(id);
 	}
 	
@@ -46,7 +47,7 @@ public class LaptopController
 	}
 	
 	@PutMapping("update")
-	public Laptop updateLaptop(int id ,@RequestBody Laptop l) {
+	public Laptop updateLaptop(@RequestParam int id ,@RequestBody Laptop l) {
 		return service.updateLaptop(id, l);
 	}
 }
