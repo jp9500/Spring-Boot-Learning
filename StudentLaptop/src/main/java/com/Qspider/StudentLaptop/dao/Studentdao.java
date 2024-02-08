@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.Qspider.StudentLaptop.dto.Student;
+import com.Qspider.StudentLaptop.Entity.Student;
 import com.Qspider.StudentLaptop.repo.StudentRepo;
 
 @Repository
@@ -27,22 +27,10 @@ public class Studentdao
 		return null;
 	}
 	
-	public List<Student> findAllStudent() {
-		return repo.findAll();
-	}
-	
-	public String deleteOneStudent(int id) {
+	public Student deleteOneStudent(int id) {
 		Student st=repo.findById(id).get();
-		String name=st.getStudentName();
 		repo.deleteById(id);
-		System.out.println(name);
-		return name +" is Deleted Successfully";
-		
-	}
-	
-	public String deleteAllStudent() {
-		repo.deleteAll();
-		return "All student deleted Successfully";
+		return st;
 	}
 	
 	public Student updateStudent(int id , Student s) {
@@ -50,7 +38,12 @@ public class Studentdao
 		if(exSt != null) {
 			s.setStudentId(id);
 			repo.save(s);
+			return s;
 		}
-		return s;
+		return null;
+	}
+	
+	public List<Student> findAllStudent() {
+		return repo.findAll();
 	}
 }

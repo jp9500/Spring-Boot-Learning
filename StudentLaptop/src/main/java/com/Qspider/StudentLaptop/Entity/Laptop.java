@@ -1,4 +1,4 @@
-package com.Qspider.StudentLaptop.dto;
+package com.Qspider.StudentLaptop.Entity;
 
 import org.springframework.stereotype.Component;
 
